@@ -1,0 +1,13 @@
+// Function to bypass level restrictions for administrators
+function allow_admin_bypass_levels($access, $post, $user_membership) {
+    // Check if the user is an administrator
+    if (in_array('administrator', $user_membership->roles)) {
+        // Allow the administrator to access any level content by returning true
+        return true;
+    }
+
+    // For non-administrator users, retain the original access behavior
+    return $access;
+}
+
+add_filter('pmpro_has_membership_access_filter', 'allow_admin_bypass_levels', 10, 3);
